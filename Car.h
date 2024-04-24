@@ -1,5 +1,6 @@
 #pragma once
 #include "raylib.h"
+#include "Tile.h"
 #include <cmath>
 class Car
 {
@@ -25,5 +26,7 @@ public:
 	void Unload();
 	void StopCar();
 	Rectangle GetCarRect();
+	bool CheckCollisionAABB(Rectangle rect1, Rectangle rect2);
+	bool IsCollidingWithObject(Tile& tile);
 };
 

@@ -1,5 +1,7 @@
 #include "Car.h"
 
+bool isCarStopped;
+
 Car::Car(Rectangle rect, float initialRotation)
 {
 	mCarRect = rect;
@@ -90,6 +92,21 @@ void Car::Update()
             mRotationSpeed = 0;
     }
 
+    if (isCarStopped) {
+        if (mVelocity > 0) {
+            mVelocity -= 400 * GetFrameTime();
+        }
+        else if (mVelocity < 0) {
+            mVelocity += 400 * GetFrameTime();
+        }
+        if (abs(mVelocity) < 400 * GetFrameTime())
+        {
+            isCarStopped = false;
+            mVelocity = 0;
+            mRotationSpeed = 0;
+        }
+    }
+
 
     mPosition.x += mVelocity * cos(mRotation) * GetFrameTime();
     mPosition.y += mVelocity * sin(mRotation) * GetFrameTime();
@@ -108,11 +125,29 @@ void Car::Unload()
 
 void Car::StopCar()
 {
-    mVelocity = 0;
-    mRotationSpeed = 0;
+    mVelocity *= -1;
+    isCarStopped = true;
 }
 
 Rectangle Car::GetCarRect()
 {
     return Rectangle{ mPosition.x, mPosition.y, mSize.x, mSize.y };
+}
+
+bool Car::CheckCollisionAABB(Rectangle rect1, Rectangle rect2)
+{
+    if (rect1.x + rect1.width < rect2.x || rect2.x + rect2.width < rect1.x ||
+        rect1.y + rect1.height < rect2.y || rect2.y + rect2.height < rect1.y)
+    {
+        return false;
+    }
+    return true;
+}
+
+bool Car::IsCollidingWithObject(Tile& tile)
+{
+    Rectangle carRect = GetCarRect();
+    Rectangle tileRect = { tile.GetPosX(), tile.GetPosY(), tile.GetSizeX(), tile.GetSizeY() };
+
+    return CheckCollisionAABB(carRect, tileRect);
 }

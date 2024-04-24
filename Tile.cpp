@@ -25,14 +25,6 @@ void Tile::Draw()
 
 void Tile::Update()
 {
-	if (isCollidingWithCar()) {
-		if (mType == OBSTACLE) {
-			
-			mCar->StopCar();
-		}
-		if (mType == GRASS) {
-		}
-	}
 }
 
 void Tile::Unload()
@@ -53,15 +45,7 @@ void Tile::ChangeType(TileType type)
 	}
 }
 
-void Tile::SetCar(Car* car)
+TileType Tile::GetTileType()
 {
-	mCar = car;
-}
-
-bool Tile::isCollidingWithCar()
-{
-	Rectangle carRect = mCar->GetCarRect();
-	Rectangle tileRect = { mPosX, mPosY, mSizeX, mSizeY };
-
-	return CheckCollisionRecs(carRect, tileRect);
+	return mType;
 }

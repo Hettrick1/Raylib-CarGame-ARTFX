@@ -16,7 +16,6 @@ void MapManager::Load()
 	for (int i = 0; i < 20; i++) {
 		for (int j = 0; j < 20; j++) {
 			mMap[i][j] = new Tile(j * tileSizeX, i * TileSizeY, tileSizeX, TileSizeY);
-			mMap[i][j]->SetCar(mCar);
 		}
 	}
 	mMap[10][10]->ChangeType(OBSTACLE);
@@ -34,6 +33,9 @@ void MapManager::Update()
 	for (int i = 0; i < 20; i++) {
 		for (int j = 0; j < 20; j++) {
 			mMap[i][j]->Update();
+			if (mCar->IsCollidingWithObject(*mMap[i][j]) && mMap[i][j]->GetTileType() == OBSTACLE) {
+				mCar->StopCar();
+			}
 		}
 	}
 }

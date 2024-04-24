@@ -1,8 +1,6 @@
 #pragma once
 #include "TileType.h"
 #include "raylib.h"
-#include "Car.h"
-#include "rlgl.h"
 
 #include <iostream>
 
@@ -15,7 +13,6 @@ private:
 	int mSizeY;
 	TileType mType;
 	Color mColor;
-	Car* mCar;
 public:
 	Tile(int posX, int posY, int sizeX, int sizeY);
 	~Tile();
@@ -24,7 +21,10 @@ public:
 	void Update();
 	void Unload();
 	void ChangeType(TileType type);
-	void SetCar(Car* car);
-	bool isCollidingWithCar();
+	TileType GetTileType();
+	int GetPosX() const { return mPosX; }
+	int GetPosY() const { return mPosY; }
+	int GetSizeX() const { return mSizeX; }
+	int GetSizeY() const { return mSizeY; }
 };
 
