@@ -1,0 +1,10 @@
+﻿  raudio.c
+  rcore.c
+  rmodels.c
+  rglfw.c
+  rshapes.c
+  rtext.c
+  rtextures.c
+  utils.c
+  Génération de code en cours...
+  raylib.vcxproj -> B:\Downloads\raylib-master\projects\VS2022\build\raylib\bin\x64\Debug\raylib.lib
