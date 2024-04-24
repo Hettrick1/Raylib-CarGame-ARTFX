@@ -8,10 +8,11 @@ Car::Car(Rectangle rect, float initialRotation)
 	mVelocity = 0;
 	mRotationSpeed = 0;
     mRotation = 0;
-	mMaxVelocity = 170.0;
+	mMaxVelocity = 250.0;
     mMaxAngularVelocity = 5.0;
-    mAcceleration = 150.0;
+    mAcceleration = 230.0;
     mAngularAcceleration = 5.0;
+    mDragCoefficient = 2;
 }
 
 Car::~Car()
@@ -30,12 +31,27 @@ void Car::Update()
 {
     if (IsKeyDown(KEY_W))
     {
+        if (mRotationSpeed != 0)
+        {
+            float dragFactor = mDragCoefficient * abs(mRotationSpeed);
+            if (mVelocity > 200 ) {
+                mVelocity -= mAcceleration * dragFactor * GetFrameTime();
+            }
+        }
         mVelocity += mAcceleration * GetFrameTime();
         if (mVelocity > mMaxVelocity)
             mVelocity = mMaxVelocity;
     }
     else if (IsKeyDown(KEY_S))
     {
+        if (mRotationSpeed != 0)
+        {
+            float dragFactor = mDragCoefficient * abs(mRotationSpeed);
+            if (mVelocity < -200)
+            {
+                mVelocity += mAcceleration * dragFactor * GetFrameTime();
+            }
+        }
         mVelocity -= mAcceleration * GetFrameTime();
         if (mVelocity < -mMaxVelocity)
             mVelocity = -mMaxVelocity;
@@ -51,15 +67,15 @@ void Car::Update()
             mVelocity = 0;
     }
 
-    if (IsKeyDown(KEY_D) && mVelocity > 0)
+    if (IsKeyDown(KEY_D) && mVelocity != 0)
     {
-        mRotationSpeed += mAngularAcceleration * GetFrameTime() * (mVelocity / 300);
+        mRotationSpeed += mAngularAcceleration * GetFrameTime() * (mVelocity / 1000);
         if (mRotationSpeed > mMaxAngularVelocity)
             mRotationSpeed = mMaxAngularVelocity;
     }
-    else if (IsKeyDown(KEY_A) && mVelocity > 0)
+    else if (IsKeyDown(KEY_A) && mVelocity != 0)
     {
-        mRotationSpeed -= mAngularAcceleration * GetFrameTime() * (mVelocity / 300);
+        mRotationSpeed -= mAngularAcceleration * GetFrameTime() * (mVelocity / 1000);
         if (mRotationSpeed < -mMaxAngularVelocity)
             mRotationSpeed = -mMaxAngularVelocity;
     }
@@ -73,6 +89,7 @@ void Car::Update()
         if (abs(mRotationSpeed) < mAngularAcceleration * 10 * GetFrameTime())
             mRotationSpeed = 0;
     }
+
 
     mPosition.x += mVelocity * cos(mRotation) * GetFrameTime();
     mPosition.y += mVelocity * sin(mRotation) * GetFrameTime();

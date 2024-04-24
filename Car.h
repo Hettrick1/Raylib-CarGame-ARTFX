@@ -14,6 +14,7 @@ private:
 	float mMaxVelocity;
 	float mMaxAngularVelocity;
 	float mRotation;
+	float mDragCoefficient;
 public:
 	Car(Rectangle rect, float initialRotation);
 	~Car();
