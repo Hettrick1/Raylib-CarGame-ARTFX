@@ -4,8 +4,9 @@ class MapManager
 {
 private:
 	Tile* mMap[20][20];
+	Car* mCar;
 public:
-	MapManager();
+	MapManager(Car* car);
 	~MapManager();
 	void Load();
 	void Start();

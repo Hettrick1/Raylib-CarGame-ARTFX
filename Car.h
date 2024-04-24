@@ -23,5 +23,7 @@ public:
 	void Update();
 	void Draw();
 	void Unload();
+	void StopCar();
+	Rectangle GetCarRect();
 };
 

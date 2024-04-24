@@ -9,9 +9,9 @@ Car::Car(Rectangle rect, float initialRotation)
 	mRotationSpeed = 0;
     mRotation = 0;
 	mMaxVelocity = 250.0;
-    mMaxAngularVelocity = 5.0;
+    mMaxAngularVelocity = 7.0;
     mAcceleration = 230.0;
-    mAngularAcceleration = 5.0;
+    mAngularAcceleration = 7.0;
     mDragCoefficient = 2;
 }
 
@@ -104,4 +104,15 @@ void Car::Draw()
 
 void Car::Unload()
 {
+}
+
+void Car::StopCar()
+{
+    mVelocity = 0;
+    mRotationSpeed = 0;
+}
+
+Rectangle Car::GetCarRect()
+{
+    return Rectangle{ mPosition.x, mPosition.y, mSize.x, mSize.y };
 }

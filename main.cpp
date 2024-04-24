@@ -3,8 +3,9 @@
 #include "Car.h"
 #include <iostream>
 
-MapManager map;
+
 Car car = Car(Rectangle{100,100, 60,30}, 0);
+MapManager map = MapManager(&car);
 
 void Load();
 void Start();
