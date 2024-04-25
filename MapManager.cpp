@@ -3,6 +3,8 @@
 MapManager::MapManager(Car* car)
 {
 	mCar = car;
+	mMapImage = Image();
+	mMapIndex = 1;
 }
 
 MapManager::~MapManager()
@@ -11,6 +13,7 @@ MapManager::~MapManager()
 
 void MapManager::Load()
 {
+	mMapImage = LoadImage(TextFormat("maps/Map%i.png", mMapIndex));
 	int tileSizeX = 50;
 	int TileSizeY = 50;
 	for (int i = 0; i < 20; i++) {

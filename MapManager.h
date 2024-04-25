@@ -6,6 +6,8 @@ class MapManager
 private:
 	Tile* mMap[20][20];
 	Car* mCar;
+	Image mMapImage;
+	int mMapIndex;
 public:
 	MapManager(Car* car);
 	~MapManager();

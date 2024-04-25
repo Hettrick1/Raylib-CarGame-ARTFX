@@ -103,11 +103,11 @@ void Car::Update()
 
     if (isCarStopped) {
         if (mVelocity > 0) {
-            mVelocity -= 400 * GetFrameTime();
+            mVelocity -= 500 * GetFrameTime();
 
         }
         else if (mVelocity < 0) {
-            mVelocity += 400 * GetFrameTime();
+            mVelocity += 500 * GetFrameTime();
 
         }
         if (mVelocity == 0) {
