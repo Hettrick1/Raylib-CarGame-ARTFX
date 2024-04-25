@@ -41,8 +41,9 @@ void Car::Update()
             }
         }
         mVelocity += mAcceleration * GetFrameTime();
-        if (mVelocity > mMaxVelocity)
+        if (mVelocity > mMaxVelocity) {
             mVelocity = mMaxVelocity;
+        }
     }
     else if (IsKeyDown(KEY_S))
     {
@@ -55,55 +56,62 @@ void Car::Update()
             }
         }
         mVelocity -= mAcceleration * GetFrameTime();
-        if (mVelocity < -mMaxVelocity)
+        if (mVelocity < -mMaxVelocity) {
             mVelocity = -mMaxVelocity;
+        }
     }
     else
     {
-        if (mVelocity > 0)
+        if (mVelocity > 0) {
             mVelocity -= mAcceleration * GetFrameTime();
-        else if (mVelocity < 0)
+        }
+        else if (mVelocity < 0) {
             mVelocity += mAcceleration * GetFrameTime();
+        }
 
-        if (abs(mVelocity) < mAcceleration * GetFrameTime())
+        if (abs(mVelocity) < mAcceleration * GetFrameTime()) {
             mVelocity = 0;
+        }
     }
 
     if (IsKeyDown(KEY_D) && mVelocity != 0)
     {
         mRotationSpeed += mAngularAcceleration * GetFrameTime() * (mVelocity / 1000);
-        if (mRotationSpeed > mMaxAngularVelocity)
+        if (mRotationSpeed > mMaxAngularVelocity) {
             mRotationSpeed = mMaxAngularVelocity;
+        }
     }
     else if (IsKeyDown(KEY_A) && mVelocity != 0)
     {
         mRotationSpeed -= mAngularAcceleration * GetFrameTime() * (mVelocity / 1000);
-        if (mRotationSpeed < -mMaxAngularVelocity)
+        if (mRotationSpeed < -mMaxAngularVelocity) {
             mRotationSpeed = -mMaxAngularVelocity;
+        }
     }
     else
     {
-        if (mRotationSpeed > 0)
+        if (mRotationSpeed > 0) {
             mRotationSpeed -= mAngularAcceleration * 10 * GetFrameTime();
-        else if (mRotationSpeed < 0)
+        }
+        else if (mRotationSpeed < 0) {
             mRotationSpeed += mAngularAcceleration * 10 * GetFrameTime();
-
-        if (abs(mRotationSpeed) < mAngularAcceleration * 10 * GetFrameTime())
+        }
+        if (abs(mRotationSpeed) < mAngularAcceleration * 10 * GetFrameTime()) {
             mRotationSpeed = 0;
+        }
     }
 
     if (isCarStopped) {
         if (mVelocity > 0) {
             mVelocity -= 400 * GetFrameTime();
+
         }
         else if (mVelocity < 0) {
             mVelocity += 400 * GetFrameTime();
+
         }
-        if (abs(mVelocity) < 400 * GetFrameTime())
-        {
+        if (mVelocity == 0) {
             isCarStopped = false;
-            mVelocity = 0;
-            mRotationSpeed = 0;
         }
     }
 
@@ -115,7 +123,7 @@ void Car::Update()
 
 void Car::Draw()
 {
-	DrawRectanglePro(Rectangle{mPosition.x, mPosition.y, mSize.x, mSize.y}, {(mSize.x/3), mSize.y / 2}, mRotation/(PI/180), WHITE);
+	DrawRectanglePro(Rectangle{mPosition.x, mPosition.y, mSize.x, mSize.y}, {(mSize.x/2), mSize.y / 2}, mRotation/(PI/180), WHITE);
 	DrawCircle(mPosition.x, mPosition.y, 5, RED);
 }
 
@@ -125,8 +133,10 @@ void Car::Unload()
 
 void Car::StopCar()
 {
-    mVelocity *= -1;
-    isCarStopped = true;
+    if (!isCarStopped) {
+        mVelocity *= -1;
+        isCarStopped = true;
+    }
 }
 
 Rectangle Car::GetCarRect()
@@ -134,10 +144,9 @@ Rectangle Car::GetCarRect()
     return Rectangle{ mPosition.x, mPosition.y, mSize.x, mSize.y };
 }
 
-bool Car::CheckCollisionAABB(Rectangle rect1, Rectangle rect2)
+bool Car::CheckCollisionAABB(Rectangle carRect, Rectangle rect2)
 {
-    if (rect1.x + rect1.width < rect2.x || rect2.x + rect2.width < rect1.x ||
-        rect1.y + rect1.height < rect2.y || rect2.y + rect2.height < rect1.y)
+    if (carRect.x + carRect.width / 2 < rect2.x || rect2.x + rect2.width < carRect.x - carRect.width /2 || carRect.y + carRect.height /2 < rect2.y || rect2.y + rect2.height < carRect.y - carRect.height / 2)
     {
         return false;
     }
