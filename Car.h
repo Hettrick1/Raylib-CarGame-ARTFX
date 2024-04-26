@@ -16,6 +16,10 @@ private:
 	float mMaxAngularVelocity;
 	float mRotation;
 	float mDragCoefficient;
+	Vector2 frontCircleCenter;
+	Vector2 middleCircleCenter;
+	Vector2 backCircleCenter;
+	float circleRadius;
 public:
 	Car(Rectangle rect, float initialRotation);
 	~Car();
@@ -25,8 +29,11 @@ public:
 	void Draw();
 	void Unload();
 	void StopCar();
+	void SetCarPosition(Vector2 pos);
+	void SetMaxVelocity(float velo);
 	Rectangle GetCarRect();
 	bool CheckCollisionAABB(Rectangle rect1, Rectangle rect2);
 	bool IsCollidingWithObject(Tile& tile);
+	bool IsHoveringObject(Tile& tile);
 };
 

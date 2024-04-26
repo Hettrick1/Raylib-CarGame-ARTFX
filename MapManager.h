@@ -8,6 +8,7 @@ private:
 	Car* mCar;
 	Image mMapImage;
 	int mMapIndex;
+	Vector2 mSpawnPos;
 public:
 	MapManager(Car* car);
 	~MapManager();
@@ -17,5 +18,6 @@ public:
 	void Draw();
 	void Unload();
 	void SetMapIndex(int index);
+	Vector2 GetSpawnPosition();
 };
 

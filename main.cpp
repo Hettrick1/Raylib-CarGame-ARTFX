@@ -45,6 +45,7 @@ void Update()
     if (!menu.GetIsInStartMenu() && !justEnteredMap) {
         map.SetMapIndex(menu.GetMapChosen());
         map.Load();
+        car.SetCarPosition(map.GetSpawnPosition());
         justEnteredMap = true;
     }
     if (!menu.GetIsInStartMenu() && justEnteredMap) {
