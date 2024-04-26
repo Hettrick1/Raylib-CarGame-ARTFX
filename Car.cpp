@@ -45,6 +45,9 @@ void Car::Update()
             mVelocity = mMaxVelocity;
         }
     }
+    else if (IsKeyReleased(KEY_W)) {
+        mRotationSpeed = 0;
+    }
     else if (IsKeyDown(KEY_S))
     {
         if (mRotationSpeed != 0)
@@ -60,6 +63,9 @@ void Car::Update()
             mVelocity = -mMaxVelocity;
         }
     }
+    else if (IsKeyReleased(KEY_S)) {
+        mRotationSpeed = 0;
+    }
     else
     {
         if (mVelocity > 0) {
@@ -74,14 +80,14 @@ void Car::Update()
         }
     }
 
-    if (IsKeyDown(KEY_D) && mVelocity != 0)
+    if (IsKeyDown(KEY_D))
     {
         mRotationSpeed += mAngularAcceleration * GetFrameTime() * (mVelocity / 1000);
         if (mRotationSpeed > mMaxAngularVelocity) {
             mRotationSpeed = mMaxAngularVelocity;
         }
     }
-    else if (IsKeyDown(KEY_A) && mVelocity != 0)
+    else if (IsKeyDown(KEY_A))
     {
         mRotationSpeed -= mAngularAcceleration * GetFrameTime() * (mVelocity / 1000);
         if (mRotationSpeed < -mMaxAngularVelocity) {
@@ -118,7 +124,12 @@ void Car::Update()
 
     mPosition.x += mVelocity * cos(mRotation) * GetFrameTime();
     mPosition.y += mVelocity * sin(mRotation) * GetFrameTime();
-    mRotation += mRotationSpeed * GetFrameTime();
+    if (mVelocity != 0) {
+        mRotation += mRotationSpeed * GetFrameTime();
+        if (mRotation > 359) {
+            mRotation = 359;
+        }
+    }
 }
 
 void Car::Draw()

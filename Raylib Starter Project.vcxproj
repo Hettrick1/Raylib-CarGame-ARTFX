@@ -137,11 +137,13 @@
     <ClCompile Include="Car.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MapManager.cpp" />
+    <ClCompile Include="Menus.cpp" />
     <ClCompile Include="Tile.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Car.h" />
     <ClInclude Include="MapManager.h" />
+    <ClInclude Include="Menus.h" />
     <ClInclude Include="Tile.h" />
     <ClInclude Include="TileType.h" />
   </ItemGroup>

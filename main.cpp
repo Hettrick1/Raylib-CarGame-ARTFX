@@ -1,11 +1,13 @@
 #include "raylib.h"
 #include "MapManager.h"
 #include "Car.h"
+#include "Menus.h"
 #include <iostream>
 
 
 Car car = Car(Rectangle{100,100, 60,30}, 0);
 MapManager map = MapManager(&car);
+Menus menu;
 
 void Load();
 void Start();
@@ -28,7 +30,10 @@ void Load()
 {
     InitWindow(1000, 1000, "Car Game ARTFX");
     SetTargetFPS(60);
-    map.Load();
+    menu.Load();
+    if (!menu.GetIsInStartMenu()) {
+        map.Load();
+    }
 }
 
 void Start()
@@ -38,20 +43,32 @@ void Start()
 
 void Update()
 {
-    map.Update();
-    car.Update();
+    if (!menu.GetIsInStartMenu()) {
+        map.Update();
+        car.Update();
+    }
+    else {
+        menu.StartMenuUpdate();
+    }
 }
 
 void Draw()
 {
     BeginDrawing();
     ClearBackground(Color({ 255, 255, 255, 255 }));
-    map.Draw();
-    car.Draw();
+    if (!menu.GetIsInStartMenu()) {
+        map.Draw();
+        car.Draw();;
+    }
+    else {
+        menu.StartMenuDraw();
+    }
+
     EndDrawing();
 }
 
 void Unload()
 {
+    menu.Unload();
     CloseWindow();
 }
