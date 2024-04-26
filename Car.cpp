@@ -11,9 +11,9 @@ Car::Car(Rectangle rect, float initialRotation)
 	mRotationSpeed = 0;
     mRotation = 0;
 	mMaxVelocity = 250.0;
-    mMaxAngularVelocity = 7.0;
+    mMaxAngularVelocity = 10.0;
     mAcceleration = 230.0;
-    mAngularAcceleration = 7.0;
+    mAngularAcceleration = 10.0;
     mDragCoefficient = 2;
 }
 
@@ -36,7 +36,7 @@ void Car::Update()
         if (mRotationSpeed != 0)
         {
             float dragFactor = mDragCoefficient * abs(mRotationSpeed);
-            if (mVelocity > 200 ) {
+            if (mVelocity > 150 ) {
                 mVelocity -= mAcceleration * dragFactor * GetFrameTime();
             }
         }
@@ -50,7 +50,7 @@ void Car::Update()
         if (mRotationSpeed != 0)
         {
             float dragFactor = mDragCoefficient * abs(mRotationSpeed);
-            if (mVelocity < -200)
+            if (mVelocity < -150)
             {
                 mVelocity += mAcceleration * dragFactor * GetFrameTime();
             }
