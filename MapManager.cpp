@@ -65,3 +65,8 @@ void MapManager::Draw()
 void MapManager::Unload()
 {
 }
+
+void MapManager::SetMapIndex(int index)
+{
+	mMapIndex = index;
+}

@@ -16,5 +16,6 @@ public:
 	void Update();
 	void Draw();
 	void Unload();
+	void SetMapIndex(int index);
 };
 

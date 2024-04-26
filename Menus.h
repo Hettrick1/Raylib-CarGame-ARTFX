@@ -10,6 +10,7 @@ private:
 	bool mIsInStartMenu;
 	bool mIsInEndMenu;
 	int mMapIndex;
+	int mMapChosen;
 	std::vector<Texture2D> mMaps;
 public:
 	Menus();
@@ -21,5 +22,6 @@ public:
 	void EndMenuDraw();
 	void Unload();
 	bool GetIsInStartMenu();
+	int GetMapChosen();
 };
 
