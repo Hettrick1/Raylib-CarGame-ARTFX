@@ -43,6 +43,9 @@ void Tile::ChangeType(TileType type)
 	else if (mType == OBSTACLE) {
 		mColor = RED;
 	}
+	else if (mType == START) {
+		mColor = BLACK;
+	}
 }
 
 TileType Tile::GetTileType()

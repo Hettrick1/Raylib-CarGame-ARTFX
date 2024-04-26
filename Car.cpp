@@ -137,8 +137,8 @@ void Car::Update()
     }
 
     Vector2 center = { mPosition.x, mPosition.y };
-    float frontDistance = mSize.x / 2.0f;
-    float backDistance = mSize.x / 2.0f;
+    float frontDistance = mSize.x / 2.0f - circleRadius;
+    float backDistance = mSize.x / 2.0f - circleRadius;
 
     float frontX = center.x + cos(mRotation) * frontDistance;
     float frontY = center.y + sin(mRotation) * frontDistance;
@@ -157,9 +157,9 @@ void Car::Draw()
 {
 	DrawRectanglePro(Rectangle{mPosition.x, mPosition.y, mSize.x, mSize.y}, {(mSize.x/2), mSize.y / 2}, mRotation/(PI/180), WHITE);
 	DrawCircle(mPosition.x, mPosition.y, 5, RED);
-    DrawCircle(frontCircleCenter.x, frontCircleCenter.y, 15, BLUE);
-    DrawCircle(backCircleCenter.x, backCircleCenter.y, 15, RED);
-    DrawCircle(middleCircleCenter.x, middleCircleCenter.y, 15, BLACK);
+    DrawCircleLines(frontCircleCenter.x, frontCircleCenter.y, 15, BLUE);
+    DrawCircleLines(backCircleCenter.x, backCircleCenter.y, 15, RED);
+    DrawCircleLines(middleCircleCenter.x, middleCircleCenter.y, 15, BLACK);
 }
 
 void Car::Unload()

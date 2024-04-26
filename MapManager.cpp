@@ -32,7 +32,7 @@ void MapManager::Load()
 				mMap[i][j]->ChangeType(OBSTACLE);
 			}
 			else if (colors[index].r == 0 && colors[index].g == 0 && colors[index].b == 0) {
-				mMap[i][j]->ChangeType(ROAD);
+				mMap[i][j]->ChangeType(START);
 				mSpawnPos = { (float)mMap[i][j]->GetPosX(), (float)mMap[i][j]->GetPosY() };
 			}
 			index += 1;

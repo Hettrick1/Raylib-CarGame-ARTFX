@@ -13,7 +13,7 @@ Menus::~Menus()
 
 void Menus::Load()
 {
-	for (int i = 1; i < 4; i++) {
+	for (int i = 1; i < 5; i++) {
 		Texture2D texture = LoadTexture(TextFormat("maps/Map%i.png", i));
 		if (texture.id != 0) {
 			mMaps.push_back(texture);
