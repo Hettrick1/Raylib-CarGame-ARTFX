@@ -1,5 +1,10 @@
 #include "MapManager.h"
 
+Texture2D roadTexture;
+Texture2D startTexture;
+Texture2D grassTexture;
+Texture2D obstacleTexture;
+
 MapManager::MapManager(Car* car)
 {
 	mCar = car;
@@ -16,12 +21,17 @@ void MapManager::Load()
 {
 	int index = 0;
 	mMapImage = LoadImage(TextFormat("maps/Map%i.png", mMapIndex));
+	roadTexture = LoadTexture("sprites/road.png");
+	startTexture = LoadTexture("sprites/start.png");
+	grassTexture = LoadTexture("sprites/grass.png");
+	obstacleTexture = LoadTexture("sprites/obstacle.png");
+	mCar->Load();
 	Color* colors = LoadImageColors(mMapImage);
 	int tileSizeX = 50;
 	int TileSizeY = 50;
 	for (int i = 0; i < 20; i++) {
 		for (int j = 0; j < 20; j++) {
-			mMap[i][j] = new Tile(j * tileSizeX, i * TileSizeY, tileSizeX, TileSizeY);
+			mMap[i][j] = new Tile(j * tileSizeX, i * TileSizeY, tileSizeX, TileSizeY, roadTexture, startTexture, grassTexture, obstacleTexture);
 			if (colors[index].r > 0 && colors[index].g == 0 && colors[index].b == 0) {
 				mMap[i][j]->ChangeType(ROAD);
 			}
@@ -76,6 +86,16 @@ void MapManager::Draw()
 
 void MapManager::Unload()
 {
+	UnloadTexture(roadTexture);
+	UnloadTexture(grassTexture);
+	UnloadTexture(startTexture);
+	UnloadTexture(obstacleTexture);
+	mCar->Unload();
+	for (int i = 0; i < 20; i++) {
+		for (int j = 0; j < 20; j++) {
+			mMap[i][j]->Unload();
+		}
+	}
 }
 
 void MapManager::SetMapIndex(int index)

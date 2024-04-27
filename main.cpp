@@ -75,5 +75,6 @@ void Draw()
 void Unload()
 {
     menu.Unload();
+    map.Unload();
     CloseWindow();
 }

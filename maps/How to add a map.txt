@@ -1,0 +1,4 @@
+- A map is 20px * 20px
+- It need to be named "Map[n]" where [n] stands for a number between 1 and 4
+- You can only have 4 maps maximum in the game
+- To create a map : Blue pixels are for obstacles, green for grass, red for road, black for the start grid and white for the checkpoints

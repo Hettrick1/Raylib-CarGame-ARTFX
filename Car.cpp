@@ -4,6 +4,8 @@ bool isCarStopped;
 bool checkFront;
 bool checkBack;
 
+Texture2D carTexture;
+
 Car::Car(Rectangle rect, float initialRotation)
 {
 	mCarRect = rect;
@@ -18,7 +20,7 @@ Car::Car(Rectangle rect, float initialRotation)
     mAngularAcceleration = 10.0;
     mDragCoefficient = 2;
     circleRadius = 15.0f;
-    Vector2 center = { mPosition.x + mSize.x / 2.0f, mPosition.y + mSize.y / 2.0f };
+    Vector2 center = { mPosition.x, mPosition.y};
     frontCircleCenter = { center.x, center.y - mSize.y / 2.0f + circleRadius };
     middleCircleCenter = { center.x, center.y };
     backCircleCenter = { center.x, center.y + mSize.y / 2.0f - circleRadius };
@@ -30,6 +32,7 @@ Car::~Car()
 
 void Car::Load()
 {
+    carTexture = LoadTexture("sprites/car.png");
 }
 
 void Car::Start()
@@ -136,7 +139,7 @@ void Car::Update()
         }
     }
 
-    Vector2 center = { mPosition.x, mPosition.y };
+    Vector2 center = { mPosition.x, mPosition.y};
     float frontDistance = mSize.x / 2.0f - circleRadius;
     float backDistance = mSize.x / 2.0f - circleRadius;
 
@@ -155,7 +158,8 @@ void Car::Update()
 
 void Car::Draw()
 {
-	DrawRectanglePro(Rectangle{mPosition.x, mPosition.y, mSize.x, mSize.y}, {(mSize.x/2), mSize.y / 2}, mRotation/(PI/180), WHITE);
+	DrawRectanglePro(Rectangle{mPosition.x, mPosition.y, mSize.x, mSize.y}, {(mSize.x/2), mSize.y / 2}, mRotation/(PI/180), BLANK);
+    DrawTexturePro(carTexture, { 0, 0, (float)carTexture.width, (float)carTexture.height }, { mPosition.x, mPosition.y, (float)carTexture.width, (float)carTexture.height }, { (float)carTexture.width / 2.0f, (float)carTexture.height / 2.0f }, { mRotation / (PI / 180) + 90 }, WHITE);
 	DrawCircle(mPosition.x, mPosition.y, 5, RED);
     DrawCircleLines(frontCircleCenter.x, frontCircleCenter.y, 15, BLUE);
     DrawCircleLines(backCircleCenter.x, backCircleCenter.y, 15, RED);
@@ -164,6 +168,7 @@ void Car::Draw()
 
 void Car::Unload()
 {
+    UnloadTexture(carTexture);
 }
 
 void Car::StopCar()
