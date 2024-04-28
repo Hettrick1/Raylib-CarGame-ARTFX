@@ -158,12 +158,14 @@ void Car::Update()
 
 void Car::Draw()
 {
-	DrawRectanglePro(Rectangle{mPosition.x, mPosition.y, mSize.x, mSize.y}, {(mSize.x/2), mSize.y / 2}, mRotation/(PI/180), BLANK);
+	/*DrawRectanglePro(Rectangle{mPosition.x, mPosition.y, mSize.x, mSize.y}, {(mSize.x/2), mSize.y / 2}, mRotation/(PI/180), BLANK);*/
     DrawTexturePro(carTexture, { 0, 0, (float)carTexture.width, (float)carTexture.height }, { mPosition.x, mPosition.y, (float)carTexture.width, (float)carTexture.height }, { (float)carTexture.width / 2.0f, (float)carTexture.height / 2.0f }, { mRotation / (PI / 180) + 90 }, WHITE);
-	DrawCircle(mPosition.x, mPosition.y, 5, RED);
+	/*DrawCircle(mPosition.x, mPosition.y, 5, RED);
     DrawCircleLines(frontCircleCenter.x, frontCircleCenter.y, 15, BLUE);
     DrawCircleLines(backCircleCenter.x, backCircleCenter.y, 15, RED);
-    DrawCircleLines(middleCircleCenter.x, middleCircleCenter.y, 15, BLACK);
+    DrawCircleLines(middleCircleCenter.x, middleCircleCenter.y, 15, BLACK);*/
+
+    //Green -> debug
 }
 
 void Car::Unload()
