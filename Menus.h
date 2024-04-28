@@ -11,6 +11,7 @@ private:
 	bool mIsInEndMenu;
 	int mMapIndex;
 	int mMapChosen;
+	float mTimer;
 	std::vector<Texture2D> mMaps;
 public:
 	Menus();
@@ -20,8 +21,13 @@ public:
 	void EndMenuUpdate();
 	void StartMenuDraw();
 	void EndMenuDraw();
+	void TimerUpdate();
+	void TimerDraw();
+	void ResetTimer();
 	void Unload();
 	bool GetIsInStartMenu();
+	bool GetIsInEndMenu();
+	void SetIsInEndMenu(bool menu);
 	int GetMapChosen();
 };
 

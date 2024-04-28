@@ -26,5 +26,6 @@ public:
 	void SetMapIndex(int index);
 	Vector2 GetSpawnPosition();
 	bool GetHasFinished();
+	void SetHasFinished(bool finished);
 };
 

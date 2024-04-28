@@ -230,3 +230,10 @@ bool Car::GetFront()
 {
     return checkFront;
 }
+
+void Car::ResetCar()
+{
+    mVelocity = 0;
+    mRotation = 0;
+    mRotationSpeed = 0;
+}

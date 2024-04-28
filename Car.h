@@ -36,5 +36,6 @@ public:
 	bool IsCollidingWithObject(Tile& tile);
 	bool IsHoveringObject(Tile& tile);
 	bool GetFront();
+	void ResetCar();
 };
 

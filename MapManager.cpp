@@ -126,11 +126,6 @@ void MapManager::Unload()
 	UnloadTexture(obstacleTexture);
 	UnloadTexture(checkpointTexture);
 	mCar->Unload();
-	for (int i = 0; i < 20; i++) {
-		for (int j = 0; j < 20; j++) {
-			mMap[i][j]->Unload();
-		}
-	}
 }
 
 void MapManager::SetMapIndex(int index)
@@ -146,4 +141,9 @@ Vector2 MapManager::GetSpawnPosition()
 bool MapManager::GetHasFinished()
 {
 	return mHasFinished;
+}
+
+void MapManager::SetHasFinished(bool finished)
+{
+	mHasFinished = finished;
 }

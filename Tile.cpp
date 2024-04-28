@@ -34,10 +34,6 @@ void Tile::Update()
 
 void Tile::Unload()
 {
-	UnloadTexture(mRoadTexture);
-	UnloadTexture(mGrassTexture);
-	UnloadTexture(mStartTexture);
-	UnloadTexture(mObstacleTexture);
 }
 
 void Tile::ChangeType(TileType type)

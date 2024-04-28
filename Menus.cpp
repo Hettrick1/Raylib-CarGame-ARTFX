@@ -5,6 +5,7 @@ Menus::Menus()
 	mIsInStartMenu = true;
 	mIsInEndMenu = false;
 	mMapIndex = 0;
+	mTimer = 0;
 }
 
 Menus::~Menus()
@@ -86,6 +87,11 @@ void Menus::StartMenuUpdate()
 
 void Menus::EndMenuUpdate()
 {
+	ClearBackground(BLACK);
+	if (IsKeyPressed(KEY_ENTER)) {
+		mIsInStartMenu = true;
+		mIsInEndMenu = false;
+	}
 }
 
 void Menus::StartMenuDraw()
@@ -100,10 +106,30 @@ void Menus::StartMenuDraw()
 		DrawTextureEx(mMaps[i], { (float)startX + i * (120 + 60), 500}, 0, 6, WHITE);
 		DrawText(TextFormat("%i", i + 1), startX + 55 + i * (120 + 60), 650, 40, WHITE);
 	}
+	DrawText(TextFormat("Use Numpad between 1 - %i", mMapIndex), 500 - MeasureText(TextFormat("Use Numpad between 1 - %i", mMapIndex), 30) / 2, 750, 30, WHITE);
 }
 
 void Menus::EndMenuDraw()
 {
+	ClearBackground(BLACK);
+	DrawText("WELL DONE !", 500 - MeasureText("WELL DONE !", 100) / 2, 200, 100, WHITE);
+	DrawText(TextFormat("You finished your lap in only : %02.02f secondes", mTimer), 500 - MeasureText(TextFormat("You finished your lap in only : %02.02f secondes", mTimer), 30) / 2, 300, 30, WHITE);
+	DrawText("Press enter to continue....", 500 - MeasureText("Press enter to continue....", 30) / 2, 700, 30, WHITE);
+}
+
+void Menus::TimerUpdate()
+{
+	mTimer += GetFrameTime();
+}
+
+void Menus::TimerDraw()
+{
+	DrawText(TextFormat("%02i", (int)mTimer), 500 - MeasureText(TextFormat("%02i", (int)mTimer), 30), 25, 30, BLACK);
+}
+
+void Menus::ResetTimer()
+{
+	mTimer = 0;
 }
 
 void Menus::Unload()
@@ -116,6 +142,16 @@ void Menus::Unload()
 bool Menus::GetIsInStartMenu()
 {
 	return mIsInStartMenu;
+}
+
+bool Menus::GetIsInEndMenu()
+{
+	return mIsInEndMenu;
+}
+
+void Menus::SetIsInEndMenu(bool menu)
+{
+	mIsInEndMenu = menu;
 }
 
 int Menus::GetMapChosen()

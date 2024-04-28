@@ -42,18 +42,29 @@ void Start()
 
 void Update()
 {
-    if (!menu.GetIsInStartMenu() && !justEnteredMap) {
+    if (!menu.GetIsInStartMenu() && !justEnteredMap && !menu.GetIsInEndMenu() && !map.GetHasFinished()) { //load map
         map.SetMapIndex(menu.GetMapChosen());
         map.Load();
         car.SetCarPosition(map.GetSpawnPosition());
+        car.ResetCar();
+        menu.ResetTimer();
         justEnteredMap = true;
     }
-    if (!menu.GetIsInStartMenu() && justEnteredMap) {
+    if (!menu.GetIsInStartMenu() && justEnteredMap && !menu.GetIsInEndMenu() && !map.GetHasFinished()) { //update map
         map.Update();
         car.Update();
+        menu.TimerUpdate();
     }
-    else {
+    if (menu.GetIsInStartMenu() && !justEnteredMap && !menu.GetIsInEndMenu()){ // menu
         menu.StartMenuUpdate();
+        map.SetHasFinished(false);
+    }
+    if (map.GetHasFinished() && justEnteredMap && !menu.GetIsInStartMenu() && !menu.GetIsInEndMenu()) { //just finished but still not in end menu
+        menu.SetIsInEndMenu(true);
+        justEnteredMap = false;
+    }
+    if (map.GetHasFinished() && !justEnteredMap && !menu.GetIsInStartMenu() && menu.GetIsInEndMenu()) {
+        menu.EndMenuUpdate();
     }
 }
 
@@ -63,10 +74,14 @@ void Draw()
     ClearBackground(Color({ 255, 255, 255, 255 }));
     if (!menu.GetIsInStartMenu() && justEnteredMap) {
         map.Draw();
-        car.Draw();;
+        car.Draw();
+        menu.TimerDraw();
     }
-    else {
+    else if (menu.GetIsInStartMenu() && !justEnteredMap && menu.GetIsInStartMenu() && !menu.GetIsInEndMenu()) {
         menu.StartMenuDraw();
+    }
+    if (map.GetHasFinished() && !justEnteredMap && !menu.GetIsInStartMenu() && menu.GetIsInEndMenu()) {
+        menu.EndMenuDraw();
     }
 
     EndDrawing();
