@@ -18,7 +18,7 @@ Car::Car(Rectangle rect, float initialRotation)
     mMaxAngularVelocity = 10.0;
     mAcceleration = 230.0;
     mAngularAcceleration = 10.0;
-    mDragCoefficient = 2;
+    mDragCoefficient = 1.5;
     circleRadius = 15.0f;
     Vector2 center = { mPosition.x, mPosition.y};
     frontCircleCenter = { center.x, center.y - mSize.y / 2.0f + circleRadius };
@@ -210,7 +210,6 @@ bool Car::IsCollidingWithObject(Tile& tile)
         return true;
     }
 
-    // Vérifier la collision avec le cercle arrière si la voiture recule
     if (checkBack && mVelocity < 0 && CheckCollisionCircleRec({ backCircleCenter.x, backCircleCenter.y }, circleRadius, { (float)tile.GetPosX(), (float)tile.GetPosY(), (float)tile.GetSizeX(), (float)tile.GetSizeY() }))
     {
         return true;
@@ -225,4 +224,9 @@ bool Car::IsHoveringObject(Tile& tile)
         return true;
     }
     return false;
+}
+
+bool Car::GetFront()
+{
+    return checkFront;
 }

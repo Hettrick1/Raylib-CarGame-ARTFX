@@ -35,5 +35,6 @@ public:
 	bool CheckCollisionAABB(Rectangle rect1, Rectangle rect2);
 	bool IsCollidingWithObject(Tile& tile);
 	bool IsHoveringObject(Tile& tile);
+	bool GetFront();
 };
 

@@ -1,6 +1,8 @@
 #pragma once
 #include "Tile.h"
 #include "Car.h"
+#include "Checkpoints.h"
+#include <vector>
 class MapManager
 {
 private:
@@ -9,6 +11,10 @@ private:
 	Image mMapImage;
 	int mMapIndex;
 	Vector2 mSpawnPos;
+	std::vector<Checkpoints> mCheckpoints;
+	int mCheckpointCount;
+	bool mCanFinish;
+	bool mHasFinished;
 public:
 	MapManager(Car* car);
 	~MapManager();
@@ -19,5 +25,6 @@ public:
 	void Unload();
 	void SetMapIndex(int index);
 	Vector2 GetSpawnPosition();
+	bool GetHasFinished();
 };
 

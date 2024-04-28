@@ -59,6 +59,10 @@ void Tile::ChangeType(TileType type)
 		mColor = BLACK;
 		mCurrentTexture = mStartTexture;
 	}
+	else if (mType == CHECKPOINT) {
+		mColor = GRAY;
+		mCurrentTexture = mRoadTexture;
+	}
 }
 
 TileType Tile::GetTileType()
